@@ -1,0 +1,9 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.idea/
+node_modules/
+/Messaginator.Sender/appsettings.Development.json
+/Messaginator.Sender/Client/build

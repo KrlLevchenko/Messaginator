@@ -1,0 +1,42 @@
+on: push
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: "5.0"
+        
+    - name: Restore
+      run: dotnet restore
+    
+    - name: Build Messaginator.Sender
+      run: dotnet build --configuration Release
+      working-directory: Messaginator.Sender
+    
+    - name: Publish Messaginator.Sender
+      run: dotnet publish --configuration Release
+      working-directory: Messaginator.Sender
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+          username: ${{ secrets.DOCKER_LOGIN }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+    - name: Get short SHA
+      id: short_sha
+      run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+   
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        context: Messaginator.Sender
+        tags: "takayoshisimizu/messaginator-sender:${{ steps.short_sha.outputs.sha8 }}"
+        tag_with_ref: true
