@@ -9,6 +9,8 @@ namespace Messaginator.Receiver.AppStart
     {
         public static IServiceCollection AddAndConfigureMassTransit(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddTransient<MessagesConsumer>();
+
             services.AddMassTransit(cfg =>
             {
                 cfg.UsingRabbitMq((context, configurator) =>

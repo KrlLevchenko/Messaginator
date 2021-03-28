@@ -28,7 +28,6 @@ namespace Messaginator.Receiver
         {
             services.AddLogging(configure => configure.AddConsole());
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "Client/build"; });
-
             
             services.AddMediatR(typeof(Startup).Assembly);
             services.AddValidators(typeof(Startup));
@@ -37,7 +36,6 @@ namespace Messaginator.Receiver
             services.AddHttpContextAccessor();
             services.AddSingleton<MessagesStore>();
 
-            services.AddTransient<MessagesConsumer>();
             services.AddAndConfigureMassTransit(_configuration);
 
             services.AddControllers();
