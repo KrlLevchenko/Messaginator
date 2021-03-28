@@ -17,10 +17,11 @@ namespace Messaginator.Sender.Api.Send
         }
         public async Task<Response> Handle(Request request, CancellationToken ct)
         {
-            await _busControl.Publish<IMessage>(new Message(request.Message), ct);
+            var message = new Message(request.Message);
+            await _busControl.Publish<IMessage>(message, ct);
             return new Response
             {
-                Id = Uuid.NewMySqlOptimized()
+                Id = message.Id
             }; 
         }
     }

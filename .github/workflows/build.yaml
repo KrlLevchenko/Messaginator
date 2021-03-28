@@ -23,6 +23,14 @@ jobs:
       run: dotnet publish --configuration Release
       working-directory: Messaginator.Sender
 
+    - name: Build Messaginator.Receiver
+      run: dotnet build --configuration Release
+      working-directory: Messaginator.Receiver
+      
+    - name: Publish Messaginator.Receiver
+      run: dotnet publish --configuration Release
+      working-directory: Messaginator.Receiver
+
     - name: Login to DockerHub
       uses: docker/login-action@v1 
       with:
@@ -39,4 +47,10 @@ jobs:
         push: true
         context: Messaginator.Sender
         tags: "takayoshisimizu/messaginator-sender:${{ steps.short_sha.outputs.sha8 }}"
-        tag_with_ref: true
+        
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        context: Messaginator.Receiver
+        tags: "takayoshisimizu/messaginator-receiver:${{ steps.short_sha.outputs.sha8 }}"

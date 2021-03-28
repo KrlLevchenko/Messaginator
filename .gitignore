@@ -7,3 +7,4 @@ riderModule.iml
 node_modules/
 /Messaginator.Sender/appsettings.Development.json
 /Messaginator.Sender/Client/build
+/Messaginator.Receiver/appsettings.Development.json

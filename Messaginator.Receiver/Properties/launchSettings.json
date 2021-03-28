@@ -1,10 +1,10 @@
-﻿{  
-  "profiles": {   
-    "Messaginator.Sender": {
+﻿{
+  "profiles": { 
+    "Messaginator.Receiver": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5210",
+      "applicationUrl": "http://localhost:5212",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
